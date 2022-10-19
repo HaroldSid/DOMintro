@@ -8,7 +8,55 @@ const randomColor = () => {
     return `rgb(${randomN(0, 255)},${randomN(0, 255)},${randomN(0, 255)})`
 }
 
-// DOM-drill
+// !!!!!!!! 7. DOM-drill
+
+const filmL = document.querySelector("ul");
+const films = document.querySelector("ul").children;
+const alertF = (e) => {
+    if (e.target.classList.contains('important')) {
+        alert(`The most important franchise ever, the story of DOM(inic) Toretto's family.It's not about car, it's about family.`)
+    }
+    else {
+        alert(e.target.textContent);
+    }
+
+}
+
+const eraseDouble = (els) => {
+    let lengthL = films.length;
+    for (let i = 0; i < lengthL; i++){
+        for (let j = i + 1; j < lengthL; j++){
+            if (els.children[i].isEqualNode(els.children[j])) {
+                els.children[j].remove();
+                lengthL--;
+            }
+        }
+    }
+}
+
+const randomSort = () => {
+    
+}
+
+const keyupE = (e) => {
+    if (e.key === 'r') {
+        randomSort();
+    }
+}
+
+eraseDouble(filmL);
+
+for (const film of films) {
+    if (film.nodeType === Node.ELEMENT_NODE) {
+        if (film.textContent === "Fast and Furious") {
+            filmL.insertBefore(film, filmL.children[0]);
+            film.classList.add('important');
+        }
+        film.addEventListener('click', alertF);
+    }
+}
+
+document.body.addEventListener('keyup', keyupE());
 
 // // !!!!!!! 6. forms
 
