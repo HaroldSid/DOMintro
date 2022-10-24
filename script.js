@@ -8,7 +8,8 @@ const randomColor = () => {
     return `rgb(${randomN(0, 255)},${randomN(0, 255)},${randomN(0, 255)})`
 }
 
-// !!!!!!!! 7. DOM-drill
+
+//!!!!!!!! 7. DOM-drill
 
 const filmL = document.querySelector("ul");
 const films = document.querySelector("ul").children;
@@ -34,13 +35,49 @@ const eraseDouble = (els) => {
     }
 }
 
-const randomSort = () => {
-    
+const randomSortF = () => {
+    const varUl = document.querySelector('ul');
+    const lis = varUl.children;
+    for (let i = lis.length - 1; i >= 0; i--) {
+        const ran = randomN(0, i);
+        if (lis[ran].textContent === "Fast and Furious") {
+            const newFF = lis[ran].cloneNode(true);
+            varUl.prepend(newFF);
+        }
+        varUl.append(lis[ran]);            
+        
+
+    }
+    for (const film of films) {
+
+        if (film.textContent === "Fast and Furious") {
+            filmL.prepend(film);
+        }
+    }
 }
 
+const randomSort = () => {
+    const varUl = document.querySelector('ul');
+    const lis = varUl.children;
+    for (let i = lis.length - 1; i >= 0; i-- ){
+        const ran = randomN(0, i);
+        varUl.append(lis[ran]);
+    }
+    for (const film of films) {
+        
+        if (film.textContent === "Fast and Furious") {
+            filmL.prepend(film);
+        }    
+    }
+}  
+
 const keyupE = (e) => {
+
     if (e.key === 'r') {
         randomSort();
+    }
+    if (e.key === 'd') {
+        randomSortF();
     }
 }
 
@@ -56,7 +93,7 @@ for (const film of films) {
     }
 }
 
-document.body.addEventListener('keyup', keyupE());
+document.body.addEventListener('keyup', keyupE);
 
 // // !!!!!!! 6. forms
 
@@ -308,3 +345,12 @@ document.body.addEventListener('keyup', keyupE());
 //     }
 // }
 // document.body.style.backgroundColor = 'rgb(' + randomN(0, 255) + ',' + randomN(0, 255) + ',' + randomN(0, 255) + ')';
+
+
+// !!!!!!!!! TEST
+
+// const test = (text) => {
+//     console.log('hello')
+// }
+
+// document.body.addEventListener('click', () =>  test('bonjour'))
